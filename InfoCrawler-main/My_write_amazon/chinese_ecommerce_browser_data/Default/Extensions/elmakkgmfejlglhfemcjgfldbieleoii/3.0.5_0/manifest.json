@@ -1,0 +1,36 @@
+{
+   "action": {
+      "default_icon": {
+         "16": "images/icon/logo_128.png",
+         "24": "images/icon/logo_128.png",
+         "32": "images/icon/logo_128.png"
+      },
+      "default_popup": "popup.html",
+      "default_title": "萤火虫惠聚"
+   },
+   "background": {
+      "service_worker": "background.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "exclude_matches": [ "*://*.gov.cn/*", "*://*.360.com/*", "*://*.360.cn/*", "*://*.so.com/*" ],
+      "js": [ "js/umd.js", "js/jquery.js", "js/fp2.js", "js/utils.js", "js/contentScript.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   } ],
+   "description": "当您在京东等电商平台浏览商品详情页时，为您获取该商品的优惠券，领取优惠券后下单立减。",
+   "host_permissions": [ "*://*/*" ],
+   "icons": {
+      "128": "images/icon/logo_128.png",
+      "16": "images/icon/logo_16.png",
+      "32": "images/icon/logo_32.png",
+      "48": "images/icon/logo_48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAymM2JmEoGZFI4T1L5Zc4VtJJuBGjSWGcFCmyr9/FpHw0yQdk0bRbVnMwQoH1YhikbxNg/6Epf0y7auxu8EUdMnTa7KtsfkIjAoMbfr0UK/qDdtLZZ5+JEzeAorViyHpVZBLylXpkeQifv0qZi+2nxFD0syQhKS7pj56pgz3LCbsfYTFqZpl7sXJiO6j2D1JKf/n1WQ1hul4ISfsyAFXAIMy1z23rTaDnEbg7rqE3hHU8FuWW+ndU/5q3L4/QCDCE4jpW6LJnB4+CTdSq/RFO0BF0c6M8lDxDsTBiVGF0wsLJECqymev+XRxn1+YXQJmpylGZ0zdZWAv09K3deezZZQIDAQAB",
+   "manifest_version": 3,
+   "name": "萤火虫惠聚",
+   "permissions": [ "scripting", "storage" ],
+   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+   "version": "3.0.5"
+}

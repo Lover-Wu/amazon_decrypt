@@ -1,0 +1,31 @@
+2026-01-22 08:11:06.969: [INFO] OnDoneLoading sync enabled: 0
+2026-01-22 08:11:07.016: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-01-22 08:11:08.868: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-01-22 08:11:08.869: [INFO] Primary account changed.
+2026-01-22 08:11:08.869: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-01-22 08:11:08.872: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-01-22 08:11:08.898: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-01-22 08:11:13.203: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.203: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.203: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:13.204: [INFO] BookmarkNodeAdded, ABU: 0
+2026-01-22 08:11:19.250: [INFO] Sync initialization duration: 10275ms
+2026-01-23 00:56:45.031: [INFO] OnDoneLoading sync enabled: 1
+2026-01-23 00:56:52.531: [INFO] Sync initialization duration: 8ms
+2026-01-23 01:17:15.834: [INFO] OnDoneLoading sync enabled: 1
+2026-01-23 01:17:16.424: [INFO] Sync initialization duration: 8ms
+2026-01-23 01:17:54.257: [INFO] VisibilityChanged: 0
+2026-01-23 01:23:15.451: [INFO] OnDoneLoading sync enabled: 1
+2026-01-23 01:23:16.049: [INFO] Sync initialization duration: 9ms
+2026-01-23 01:30:27.482: [INFO] OnDoneLoading sync enabled: 1
+2026-01-23 01:30:29.698: [INFO] Sync initialization duration: 10ms
+2026-01-25 04:03:45.780: [INFO] OnDoneLoading sync enabled: 1
+2026-01-25 04:03:46.389: [INFO] Sync initialization duration: 10ms
+2026-01-25 04:06:07.267: [INFO] VisibilityChanged: 0
