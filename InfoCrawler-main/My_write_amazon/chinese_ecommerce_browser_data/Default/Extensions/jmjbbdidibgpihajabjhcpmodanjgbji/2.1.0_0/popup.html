@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>popup</title>
+  <link href="./css/popup.css" rel="stylesheet">
+</head>
+
+<body class="bntyh_body">
+  <div class="bntyh_contain">
+    <div class="bntyh_title_background">
+      <div class="bntyh_title">搜索更多优惠券</div>
+      <div class="bntyh_input_background">
+        <div id="bntyh_channel_search">
+          <div class="channel_list close">
+            <a class="jd_search_select" title="京东">
+              <img src="./images/jd.png" />
+              京东
+            </a>
+            <a class="tb_search_select" title="淘宝">
+              <img src="./images/tb.png" />
+              淘宝
+            </a>
+          </div>
+          <a class="current_search tb_search" data="tb" title="淘宝"><img src="./images/tb.png" />淘宝</a>
+          <div class="g-toggle"><img src="./images/arrow-down.png" /></div>
+        </div>
+        <input class="bntyh_input" placeholder="在此输入您要找优惠券的商品" type="text" />
+        <img class="bntyh_search" src="./images/zoom.png" />
+      </div>
+    </div>
+    <ul class="bntyh_hot_goods_wrap">
+    </ul>
+  </div>
+  <script src="./js/request.js"></script>
+  <script src="./js/popup.js"></script>
+</body>
+
+</html>

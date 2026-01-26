@@ -1,0 +1,160 @@
+{
+   "checksum": "0ce22789ed6c34a5f16a0656f7dcd0ef",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13404540357815041",
+            "date_last_used": "13413536959177170",
+            "guid": "e093435c-7c8a-403c-9c8d-87d8ee4bc5df",
+            "id": "9",
+            "name": "重庆邮电大学研究生院",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://yjs.cqupt.edu.cn/",
+            "visit_count": 34
+         }, {
+            "date_added": "13403265567259702",
+            "date_last_used": "13412225025881514",
+            "guid": "034f40ea-8e21-4791-b8a9-74b1df38eddd",
+            "id": "10",
+            "name": "个人空间",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://i.chaoxing.com/base?t=1758788971898",
+            "visit_count": 15
+         }, {
+            "date_added": "13403265796675638",
+            "date_last_used": "13411800937907356",
+            "guid": "90e25fb6-df50-4d64-9dd1-e9fe6438a278",
+            "id": "11",
+            "name": "写作第3287929号作文-批改网",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.pigai.org/index.php?c=v2&a=write&rid=3287929",
+            "visit_count": 30
+         }, {
+            "date_added": "13407210106090423",
+            "date_last_used": "13413518070401738",
+            "guid": "6c8fd69c-aa84-4979-a68b-f80c35433b48",
+            "id": "12",
+            "name": "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.bilibili.com/",
+            "visit_count": 56
+         }, {
+            "date_added": "13407209096859061",
+            "date_last_used": "13411529763116818",
+            "guid": "f98fa713-3a9d-4ace-8af5-d5ec427e49cb",
+            "id": "13",
+            "name": "ChatGPT",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chatgpt.com/",
+            "visit_count": 20
+         }, {
+            "date_added": "13407509980683432",
+            "date_last_used": "13413212470500871",
+            "guid": "5e90ac64-f024-4384-85c8-48fbc40e1c6c",
+            "id": "14",
+            "name": "STM32智能桌面宠物 - 立创开源硬件平台",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://oshwhub.com/sngelswyh/stm32-smart-desktop-pet",
+            "visit_count": 8
+         }, {
+            "date_added": "13408103625471318",
+            "date_last_used": "13412997802836732",
+            "guid": "7cbcfc53-9081-4550-8340-320374f15580",
+            "id": "15",
+            "name": "从内容中提取信息 - 豆包",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.doubao.com/chat/30142290333452034",
+            "visit_count": 2
+         }, {
+            "date_added": "13413365881701574",
+            "date_last_used": "13413525084682826",
+            "guid": "f6aad066-79d4-4351-8da3-51ff76d2e315",
+            "id": "16",
+            "name": "DeepSeek - 探索未至之境",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chat.deepseek.com/",
+            "visit_count": 4
+         } ],
+         "date_added": "13413544825278335",
+         "date_last_used": "0",
+         "date_modified": "13413365881701574",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "收藏夹栏",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "children": [ {
+               "date_added": "13278042125814692",
+               "date_last_used": "0",
+               "guid": "a12a1ada-53f1-48df-a62f-65312f5b6673",
+               "id": "7",
+               "name": "Lenovo Support",
+               "show_icon": false,
+               "source": "sync",
+               "type": "url",
+               "url": "http://support.lenovo.com.cn/",
+               "visit_count": 0
+            }, {
+               "date_added": "13278042125814692",
+               "date_last_used": "0",
+               "guid": "7ceb7b7a-149c-427f-9bfe-f4e8ca1cfa75",
+               "id": "8",
+               "name": "Lenovo",
+               "show_icon": false,
+               "source": "sync",
+               "type": "url",
+               "url": "http://www.lenovo.com.cn/",
+               "visit_count": 0
+            } ],
+            "date_added": "13407173237143691",
+            "date_last_used": "0",
+            "date_modified": "13407173237143691",
+            "guid": "8d6e4013-fcce-498f-836b-4085820dc963",
+            "id": "6",
+            "name": "Lenovo",
+            "source": "unknown",
+            "type": "folder"
+         } ],
+         "date_added": "13413544825278335",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "其他收藏夹",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13413544825278335",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "移动收藏夹",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CjEKDgiIgQISCH2wZOSbAQAAEgAqGDZsYUtIc3g0MXJiZi9pUWVlMTU2N0E9PUgDoAYHErUBCBASsAEKHFhTUG04SEdwT3N3OGdmOVdvRFQ0ZHRkclR6UT0SJGY2YWFkMDY2LTc5ZDQtNDM1MS04ZGEzLTUxZmY3NmQyZTMxNRgAIAAoADDvv76dvjM4xf/I0b0zQMX/yNG9M0ocRmN6ZzBZckJDVTRmcFZzM0owSHFhczUzRDdVPVonIiX/////AAAABe16dVJGZmVuQkZHYnF1SHk4M2xsaVVOUlBuNmM9ZeWWxzjCPgJgBRK1AQgOErABChxURDNEWVRzTzgrTGJLOFdmNjRSREpuOWMzZUk9EiQ1ZTkwYWM2NC1mMDI0LTQzODQtODVjOC00OGZiYzQwZTFjNmMYACAAKAAwtr21iL0zOLOpoemnM0CzqaHppzNKHGd6NDZhR3pwRTRmZDBhZjlIM2QxK014VHYwMD1aJyIl/////wAAAAT6RVBxdWJvZTJGK0Jka2IwV2xLajJhM0VIME1rPWXlTA/Cwj4CYAUStQEIDBKwAQocdXZ3Vkd1eWNXTEVCVTRKZVFHRW1ZdTJHU09nPRIkNmM4ZmQ2OWMtYWE4NC00OTc5LWE2OGItZjgwYzM1NDMzYjQ4GAAgACgAMJ/3kZq+Mzi3saLapjNAt7Gi2qYzShxneE9TK2NTMTlJWFVNQ2xkVUkwU3N5ZkVaMm89WiciJf////8AAAAE6XVaZis1MzB2WTFrdWVIZFp5RGJsdHRVY3pZZz1lpF4818I+AmAFEo4BCAESiQEKHHl4Si82ZnZrZWNyN2twNUVRekI0dFdMcGRiRT0SJDUzMDk2NGFiLTVlYTEtNWM1Zi05Y2IxLWY5OWY1NzFjODI2MBgAIAAoADC99pvdrDE4+fyb3awxQPn8m92sMUocYVJDV0xnaEY5YjVJbnFLSUR2dUovanZRa0ZjPVoAZQAAAADCPgJgABKvAQgKEqoBChw3MUpncmVoV1RwNG8yQ21YSFlvaDhsc0hDNm89EiQwMzRmNDBlYS04ZTIxLTQ3OTEtYjhhOS03NGIxZGYzOGVkZGQYACAAKAAwlo/MsbkzOLzq9p2YM0C86vadmDNKHEZndTZzZGVkTG1CaU9YUGgyd1pBQmwvTEdqbz1aISIf///+T2hDSi9ycDA0Rmg2b0lja1FQaDZ1ZnJmWmNrPWUq/WiRwj4CYAUSrwEICRKqAQocUkEwUWxGZVdVZ3U4ckFQR0xLVERPMUxORzVZPRIkZTA5MzQzNWMtN2M4YS00MDNjLTljOGQtODdkOGVlNGJjNWRmGAAgACgAMPzgkqO+Mzi0p7yClTNAtKe8gpUzShxkTm5nWFp0ZjVQcVVMd0JIWDhlbjc3TGdSMjg9WiEiH///9mQ3UVQ2QysrcjlqUDBiQzQxY1ZHbE9HeWgyST1lzoRLuMI+AmAFErUBCA8SsAEKHFZpL3VKalpwWWJMRk80NElPUlNVdTBDWlBwaz0SJDdjYmNmYzUzLTkwODEtNDU1MC04MzQwLTMyMDM3NGYxNTU4MBgAIAAoADDHr4eivDM47bGqhKozQO2xqoSqM0ocZU82eXhZRkpkend5N0x3RVVIdmh0ektDQXZ3PVonIiX/////AAAABP00RjRlTjNldGhIa1FRS3VrZS9TZ0FKN09PZG89ZdYj8w3CPgJgBRK1AQgNErABChxDNllWaENSOFlodHEyZlNYRkhuVDZBRXljS2s9EiRmOThmYTcxMy0zYTlkLTRhY2UtOGFmNS1kNWVjNDI3ZTQ5Y2IYACAAKAAwwO6F5rYzOMTi5NmmM0DE4uTZpjNKHFlPZS9vOUdzRXNwKzlNZEFkQk1wS3dQdHNkST1aJyIl/////wAAAAT0V0VaMFBaaFhXcWdNZEY3MUZic3N5S2ZMcXQ0PWX4kgPVwj4CYAUSrAEIBxKnAQocL2d1dGdmSEZUSHpwY3kyVDRiRFhCY3JBV2FnPRIkYTEyYTFhZGEtNTNmMS00OGRmLWE2MmYtNjUzMTJmNWI2NjczGAAgACgAMKz018imMzj8+dfIpjNA/PnXyKYzShxTTWc4bEVZUGFyM09YbmFXdWp1RlQ4RjRCOGs9Wh4iHEJWR3phRVhlK0ZBTHFHbW43ODAydVZpOUs2az1lAAAAAMI+AmAFEo4BCAMSiQEKHG5qZ0R1ODhlQ3J2WHA4NnBEN2ZIR2NxRnA4OD0SJDRjNmRlODk2LTY1NTUtNTE1OC05NjE2LTM3ZGM2Mjg3MjcyMxgAIAAoADDD9pvdrDE42P2b3awxQNj9m92sMUoceXpOQjAxY241NEE3Y1JVMHVUKy9QZ21UdFVvPVoAZQAAAADCPgJgABKsAQgGEqcBChwrYjhoT1JQYTVMZnJ6Q0lhUXNQNXRaVCtrbGM9EiQ4ZDZlNDAxMy1mY2NlLTQ5OGYtODM2Yi00MDg1ODIwZGM5NjMYACAAKAAwq/TXyKYzOOH518imM0Dh+dfIpjNKHGQzemNZbTJBd2dHZXpYVlAxb2dONFc1dEQ3OD1aHiIcNXpranNqQXpQcVd3cXI0MWk1L0VwNlcwSldjPWUAAAAAwj4CYAASjgEIAhKJAQocWWNTVG9udkVTUHdxQ3M0TDJjclZodjY4TDk4PRIkOTJkNWRmNjktNWQ4ZC01YjQ4LTkxNmMtYzVjNzIwZGY2NjgwGAAgACgAML72m92sMTiW/ZvdrDFAlv2b3awxShxvUFZraHdCUmJWNjVLQ1dSMitJT05IV29PdTg9WgBlAAAAAMI+AmAAEq8BCAsSqgEKHGJub3FFNzlIWXlqMzNBTGVMS3hoUlRHKy9WUT0SJDkwZTI1ZmI2LWRmNTAtNGQ2NC05ZGQxLWU5ZmU2NDM4YTI3OBgAIAAoADDSrqzntzM4k+r2nZgzQJPq9p2YM0ocMnFGR1lHNG5Pd1ZwclN5ZW9FWG5XVElIRnhvPVohIh////9URlBmcE54bWlQZStjaGlvUEk3WWJLczQ5WG89ZSxUSArCPgJgBRKtAQgIEqgBChxZQWhqUVhGc01SNjFXL1VML1p0VVlqekN0YU09EiQ3Y2ViN2I3YS0xNDljLTQyN2YtOWJmZS1mNGU4Y2ExY2ZhNzUYACAAKAAwrfTXyKYzOJv618imM0Cb+tfIpjNKHHI2Uk1MRmpvRjdESkRPTEpnNlJ4cmlJdEdjdz1aHyIdoS9jeldpRFA5Y2pKMHN2OEF5b2xqVHFWK0FDdz1lAAAAAMI+AmAFMAA4AA==",
+   "version": 1
+}

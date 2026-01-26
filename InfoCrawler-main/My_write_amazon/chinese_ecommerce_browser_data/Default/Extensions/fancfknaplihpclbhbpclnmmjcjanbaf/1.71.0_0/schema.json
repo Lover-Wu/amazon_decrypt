@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "requireLogin": {
+      "type": "boolean",
+      "title": "Login Wall",
+      "description": "Indicates whether the login wall should be set, requiring users to log in."
+    },
+    "suggestIdp": {
+      "type": "string",
+      "title": "Suggest IDP",
+      "description": "A string with the name of the identity provider to suggest for the user."
+    },
+    "customExtensionIcon": {
+      "type": "boolean",
+      "title": "Replace Extension Icon",
+      "description": "Indicates whether to replace the default extension icon with the one set up for DeepL Home if available."
+    },
+    "enforceSsoAutologin": {
+      "type": "boolean",
+      "title": "Enforce SSO Autologin",
+      "description": "Indicates whether to enforce SSO autologin, immediately forwarding the user to the SSO page instead of the onboarding"
+    },
+    "skipOnboarding": {
+      "type": "boolean",
+      "title": "Skip Onboarding",
+      "description": "If true, skips the onboarding flow after installation."
+    },
+    "preventFeedbackSurvey": {
+      "type": "boolean",
+      "title": "Prevent Feedback Survey",
+      "description": "If true, prevents feedback survey popups from being shown."
+    },
+    "hideWrite": {
+      "type": "boolean",
+      "title": "Hide Write",
+      "description": "Indicates whether to hide Write features from the UI, including Write icons, tabs, and upgrade options for Write"
+    }
+  }
+}

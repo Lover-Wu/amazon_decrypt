@@ -1,0 +1,6 @@
+2026/01/22-17:10:53.582 bd4 Reusing MANIFEST D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\chinese_ecommerce_browser_data\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/01/22-17:10:53.582 bd4 Recovering log #3
+2026/01/22-17:10:53.583 bd4 Reusing old log D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\chinese_ecommerce_browser_data\Default\Sync Data\LevelDB/000003.log 
+2026/01/22-17:10:56.362 2db0 Level-0 table #5: started
+2026/01/22-17:10:56.372 2db0 Level-0 table #5: 150123 bytes OK
+2026/01/22-17:10:56.378 2db0 Delete type=0 #3

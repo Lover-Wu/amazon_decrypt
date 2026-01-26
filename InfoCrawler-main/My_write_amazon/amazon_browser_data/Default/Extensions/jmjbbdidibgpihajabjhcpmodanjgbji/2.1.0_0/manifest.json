@@ -1,0 +1,32 @@
+{
+   "background": {
+      "persistent": true,
+      "scripts": [ "js/request.js", "js/utils.js", "js/fp2.js", "js/background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "images/icon/logo_128.png",
+      "default_popup": "popup.html",
+      "default_title": "帮您淘"
+   },
+   "content_scripts": [ {
+      "css": [ "css/injectScript.css" ],
+      "exclude_matches": [ "*://*.gov.cn/*", "*://*.360.com/*", "*://*.360.cn/*", "*://*.so.com/*" ],
+      "js": [ "js/request.js", "js/utils.js", "js/fp2.js", "js/contentScript.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   } ],
+   "description": "当您在京东等电商平台浏览商品详情页时，为您获取该商品的优惠券，领取优惠券后下单立减。",
+   "icons": {
+      "128": "images/icon/logo_128.png",
+      "16": "images/icon/logo_16.png",
+      "32": "images/icon/logo_32.png",
+      "48": "images/icon/logo_48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu6xycM+w1VhYDf7iZVkQXNkT71/umcSL9xi66FLK9A0fx0xq5NNEtnCaBY0SxWGZs0GO314Pcu0hf9bprvqJrxh8s55itIONXDFXmsoLmKZqMd1TSh6EZ5u+qXMT6iQlmb4B12f4q5w308S1A9CwDAcjc1p5gZWP2Ds/1HG5WTIUid7xgHc0ZVc0DuRMSzxU1yBREp2v6nhqgRbk8Wv7zcMZbPmWajIJticG79nEF+ZG33askRNfxKJyxC0wi2IiOmSTqBT/m0va/r1bJHX7c3yxHA12M7UjHX52ohxBw7xtBya511mq/a9X/2Ca4cWMo7vr327WYoxqze6lNqmq1QIDAQAB",
+   "manifest_version": 2,
+   "name": "帮您淘",
+   "permissions": [ "http://*/*", "https://*/*", "storage", "tabs" ],
+   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+   "version": "2.1.0",
+   "web_accessible_resources": [ "js/injectScript.js" ]
+}
