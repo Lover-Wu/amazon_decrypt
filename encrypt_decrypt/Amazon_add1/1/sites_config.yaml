@@ -6,7 +6,20 @@ alibaba:
     method: GET
     scheme: https
   name: alibaba
+  runtime:
+    cookie_refresh_backoff: 30
+    cookie_refresh_min_interval: 5
+    cookie_refresh_notice_dedup_window: 10
+    log_dedup_window: 10
+    status_log_dedup_window: 2
 amazon:
+  auth:
+    auto_on_verification: true
+    enabled: true
+    headed: true
+    login_url: https://www.amazon.com/ap/signin
+    provider: playwright
+    storage_state_path: amazon_state.json
   base_url: https://www.amazon.com
   crawler_class: AmazonCrawler
   headers:
@@ -14,6 +27,29 @@ amazon:
     method: GET
     scheme: https
   name: amazon
+  runtime:
+    playwright_headless: true
+    cookie_refresh_backoff: 30
+    cookie_refresh_min_interval: 5
+    cookie_refresh_notice_dedup_window: 10
+    fetcher: auto
+    log_dedup_window: 10
+    playwright_capture_headers:
+      enabled: true
+      trigger:
+        on_start: true
+        on_verification: true
+        every_n_requests: 0
+      match:
+        resource_types: ["document"]
+        first_match_only: true
+      persist:
+        enabled: true
+        path: captured_headers_amazon.json
+        ttl_seconds: 3600
+      apply_policy:
+        override: true
+  status_log_dedup_window: 2
 ebay:
   base_url: https://www.ebay.com
   crawler_class: EbayCrawler
@@ -22,3 +58,17 @@ ebay:
     method: GET
     scheme: https
   name: ebay
+  runtime:
+    cookie_refresh_backoff: 30
+    cookie_refresh_min_interval: 5
+    cookie_refresh_notice_dedup_window: 10
+    log_dedup_window: 10
+    status_log_dedup_window: 2
+taobao:
+  base_url: https://www.taobao.com/
+  crawler_class: taobaoCrawler
+  headers:
+    authority: www.taobao.com
+    method: GET
+    scheme: https
+  name: taobao
