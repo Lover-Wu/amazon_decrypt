@@ -1,5 +1,0 @@
-2026/01/22-19:35:54.707 40b8 Creating DB D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\amazon_browser_data\Default\Local Storage\leveldb since it was missing.
-2026/01/22-19:35:54.732 40b8 Reusing MANIFEST D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\amazon_browser_data\Default\Local Storage\leveldb/MANIFEST-000001
-2026/01/22-19:36:54.748 2c2c Level-0 table #5: started
-2026/01/22-19:36:54.754 2c2c Level-0 table #5: 21841 bytes OK
-2026/01/22-19:36:54.763 2c2c Delete type=0 #3

@@ -1,6 +1,0 @@
-2026/01/25-12:06:45.834 5ef8 Reusing MANIFEST D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\amazon_browser_data\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2026/01/25-12:06:45.835 5ef8 Recovering log #3
-2026/01/25-12:06:45.858 5ef8 Reusing old log D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\amazon_browser_data\Default\EdgeCoupons/coupons_data.db/000003.log 
-2026/01/25-12:06:46.215 4460 Level-0 table #5: started
-2026/01/25-12:06:46.220 4460 Level-0 table #5: 683670 bytes OK
-2026/01/25-12:06:46.226 4460 Delete type=0 #3

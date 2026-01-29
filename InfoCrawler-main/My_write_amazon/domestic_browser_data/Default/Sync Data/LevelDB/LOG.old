@@ -1,6 +1,0 @@
-2026/01/23-10:52:48.663 4a34 Reusing MANIFEST D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\domestic_browser_data\Default\Sync Data\LevelDB/MANIFEST-000001
-2026/01/23-10:52:48.665 4a34 Recovering log #7
-2026/01/23-10:52:48.667 4a34 Reusing old log D:\Study_data\InfoCrawler-main\InfoCrawler-main\My_write_amazon\domestic_browser_data\Default\Sync Data\LevelDB/000007.log 
-2026/01/23-10:53:03.597 4a34 Level-0 table #11: started
-2026/01/23-10:53:03.601 4a34 Level-0 table #11: 128769 bytes OK
-2026/01/23-10:53:03.606 4a34 Delete type=0 #7

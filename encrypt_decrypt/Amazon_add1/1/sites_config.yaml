@@ -1,0 +1,24 @@
+alibaba:
+  base_url: https://www.alibaba.com
+  crawler_class: AlibabaCrawler
+  headers:
+    authority: www.alibaba.com
+    method: GET
+    scheme: https
+  name: alibaba
+amazon:
+  base_url: https://www.amazon.com
+  crawler_class: AmazonCrawler
+  headers:
+    authority: www.amazon.com
+    method: GET
+    scheme: https
+  name: amazon
+ebay:
+  base_url: https://www.ebay.com
+  crawler_class: EbayCrawler
+  headers:
+    authority: www.ebay.com
+    method: GET
+    scheme: https
+  name: ebay
