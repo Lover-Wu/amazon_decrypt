@@ -24,13 +24,12 @@ load_dotenv()  # 加载.env文件
 
 # ===================== 1. 可拓展配置 =====================
 # JSON文件路径（仅需配置这个）
-JSON_FILE_PATH = "amazon_sg_戒指_20260129_160359.json"
+JSON_FILE_PATH = "amazo_相机.json"
 
 # 全局变量（动态赋值）
 CATEGORY_NAME = ""
 SIMULATE_FIELDS = {
     "category": "",
-    "search_volume": (10000, 100000),
     "review": {}
 }
 
@@ -60,7 +59,7 @@ def extract_category_by_ai(client: OpenAI, product_titles: List[str]) -> str:
     请从以下亚马逊商品标题中识别**唯一的核心品类名称**，严格遵守以下要求：
     1. 必须仅返回**一个**核心品类名称，绝对禁止返回多个品类
     2. 只返回品类名本身，不要有任何解释、说明、标点、序号或多余文字
-    3. 品类名格式参考：无线耳机、充电宝、智能手表、保温杯（仅中文，2-6字）
+    3. 品类名格式参考：无线耳机、充电宝、智能手表、保温杯、数码相机（仅中文，2-6字）
 
     商品标题列表：
     {sample_titles}
@@ -77,7 +76,7 @@ def extract_category_by_ai(client: OpenAI, product_titles: List[str]) -> str:
         category = re.sub(r'[^\u4e00-\u9fa5]', '', category).strip()
         # 二次兜底：若仍为空或过长，默认取第一个合理品类
         if not category or len(category) > 10:
-            category = "未识别品类"
+            category = "数码相机"
         print(f"AI识别核心品类：{category}")
         return category
     except Exception as e:
@@ -264,13 +263,13 @@ def generate_dynamic_review_template(client: OpenAI, category: str) -> Dict[str,
     1. 仅返回JSON格式内容，不要添加任何额外文字、说明、注释、标点或换行
     2. JSON格式示例：{{"卖点1": "评价内容1", "卖点2": "评价内容2"}}
     3. 评价需贴合{category}的核心卖点/痛点，内容简洁真实（每条10-20字）
-       ### 参考示例（无线耳机品类） ###
-        "音质清晰": "音质很清晰，无杂音，佩戴舒适",
-        "续航持久": "充一次电可用一整天，续航超预期",
-        "连接稳定": "蓝牙连接快，不会断连，性价比高",
-        "音质差": "音质有杂音，低音效果完全不行",
-        "续航短": "续航只有2小时，频繁充电很麻烦",
-        "连接卡顿": "蓝牙经常断连，使用体验很差"
+       ### 参考示例（数码相机品类） ###
+        "画质清晰": "4K画质清晰，色彩还原度高",
+        "操作简单": "操作便捷，新手也能快速上手",
+        "防抖效果好": "防抖效果佳，视频拍摄不模糊",
+        "画质差": "像素低，画质模糊不清晰",
+        "操作复杂": "功能繁琐，新手难以操作",
+        "续航短": "电池续航短，拍摄易断电"
     """
     try:
         response = client.chat.completions.create(
@@ -300,7 +299,7 @@ def generate_dynamic_review_template(client: OpenAI, category: str) -> Dict[str,
         return review_dict
     except Exception as e:
         print(f"警告：AI生成评价模板失败（{e}）")
-        # 兜底默认模板（适配手机品类）
+        # 兜底默认模板（适配数码相机品类）
         return {
             "性价比高": f"{category}价格实惠，使用体验好",
             "续航长": f"{category}续航时间久，满足日常使用",
@@ -318,9 +317,11 @@ def read_amazon_json(file_path: str) -> Dict:
         with open(file_path, "r", encoding="utf-8") as f:
             json_str = f.read().strip()
             # 修复JSON格式不完整的问题（兜底）
-            if not json_str.endswith("}"):
-                # 更安全的JSON补全逻辑
-                if json_str.count("{") > json_str.count("}"):
+            if not json_str.endswith("]") and not json_str.endswith("}"):
+                # 适配数组格式的JSON
+                if json_str.startswith("[") and not json_str.endswith("]"):
+                    json_str += "]"
+                elif json_str.count("{") > json_str.count("}"):
                     json_str += "}" * (json_str.count("{") - json_str.count("}"))
             data = json.loads(json_str)
 
@@ -360,7 +361,7 @@ def clean_empty_fields(raw_data: Dict) -> List[Dict]:
 
 
 def extract_numeric_value(text: str) -> Union[float, None]:
-    """提取字符串中的数值（支持S$、千分位逗号）"""
+    """提取字符串中的数值（支持$、千分位逗号）"""
     if not isinstance(text, str):
         return None
     # 移除所有货币符号和千分位逗号
@@ -376,6 +377,26 @@ def extract_numeric_value(text: str) -> Union[float, None]:
         return None
 
 
+def extract_sales_from_purchase_hint(hint: str) -> int:
+    """从purchase_hint提取销量数值（如1k+ →1000，500+→500，6k+→6000）"""
+    if not isinstance(hint, str):
+        return 0
+
+    # 匹配数字+单位（k代表千）
+    pattern = r'(\d+)k\+'
+    match = re.search(pattern, hint.lower())
+    if match:
+        return int(match.group(1)) * 1000
+
+    # 匹配纯数字+
+    pattern = r'(\d+)\+'
+    match = re.search(pattern, hint)
+    if match:
+        return int(match.group(1))
+
+    return 0
+
+
 def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFrame:
     """将清洗后的JSON数据转换为DataFrame（核心：真实销量/评论数替代）"""
     # 1. 提取所有标题，AI识别品类
@@ -385,12 +406,14 @@ def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFr
     SIMULATE_FIELDS["category"] = f"{CATEGORY_NAME}>{CATEGORY_NAME}"
     SIMULATE_FIELDS["review"] = generate_dynamic_review_template(client, CATEGORY_NAME)
 
-    # 2. 构建DataFrame数据
+    # 2. 构建DataFrame数据（新增JSON中有效字段）
     df_data = {
-        "asin": [], "title": [], "price": [], "original_price": [],
-        "discount_percentage": [], "category": [], "search_volume": [],
-        "sales": [], "review": [], "ai_keywords": [],
-        "reviews_count": []
+        "asin": [], "product_id": [], "title": [], "url": [],
+        "price": [], "original_price": [], "discount_percentage": [],
+        "category": [], "sales": [], "review": [], "ai_keywords": [],
+        "reviews_count": [], "rating": [], "amazon_choice": [],
+        "best_seller": [], "prime_eligible": [], "brand": [],
+        "purchase_hint": []
     }
 
     np.random.seed(42)
@@ -401,8 +424,10 @@ def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFr
     for idx, product in enumerate(cleaned_products):
         # 核心字段填充
         df_data["asin"].append(product.get("asin", ""))
+        df_data["product_id"].append(product.get("product_id", ""))
         title = product.get("title", "")
         df_data["title"].append(title)
+        df_data["url"].append(product.get("url", ""))
 
         # 价格提取（强化容错）
         price = extract_numeric_value(product.get("price", ""))
@@ -413,24 +438,23 @@ def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFr
         df_data["original_price"].append(
             original_price if original_price is not None else price if price is not None else 0.0)
 
-        discount = extract_numeric_value(product.get("discount_percentage", ""))
-        df_data["discount_percentage"].append(discount if discount is not None else 0.0)
+        # 计算折扣率
+        if price and original_price and original_price > price:
+            discount = ((original_price - price) / original_price) * 100
+        else:
+            discount = 0.0
+        df_data["discount_percentage"].append(round(discount, 2))
 
         df_data["category"].append(SIMULATE_FIELDS["category"])
 
-        # 核心修改：真实销量优先，无则用评论数替代
-        # 优先提取真实销量
-        real_sales = extract_numeric_value(product.get("sales", ""))
-        if real_sales is None:
+        # 核心修改：优先从purchase_hint提取真实销量，无则用评论数替代
+        purchase_hint = product.get("purchase_hint", "")
+        real_sales = extract_sales_from_purchase_hint(purchase_hint)
+        if real_sales == 0:
             # 无真实销量则用评论数替代
-            real_sales = extract_numeric_value(product.get("reviews", ""))
-        # 兜底：无数据则设为0
-        sales_value = int(real_sales) if real_sales is not None else 0
-
-        # 搜索量仍保留模拟（可根据需求调整）
-        sv_min, sv_max = SIMULATE_FIELDS["search_volume"]
-        df_data["search_volume"].append(int(np.random.randint(sv_min, sv_max)))
-        df_data["sales"].append(sales_value)
+            review_count = extract_numeric_value(product.get("reviews", ""))
+            real_sales = int(review_count) if review_count is not None else 0
+        df_data["sales"].append(real_sales)
 
         # 批量关键词赋值
         df_data["ai_keywords"].append(batch_keywords[idx])
@@ -438,6 +462,19 @@ def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFr
         # 提取评论数字段
         reviews_count = extract_numeric_value(product.get("reviews", ""))
         df_data["reviews_count"].append(reviews_count if reviews_count is not None else 0)
+
+        # 提取评分字段
+        rating = extract_numeric_value(product.get("rating", ""))
+        df_data["rating"].append(rating if rating is not None else 0.0)
+
+        # 亚马逊特色标签
+        df_data["amazon_choice"].append(1 if product.get("amazon_choice") else 0)
+        df_data["best_seller"].append(1 if product.get("best_seller") else 0)
+        df_data["prime_eligible"].append(1 if product.get("prime_eligible") else 0)
+
+        # 品牌字段
+        df_data["brand"].append(product.get("brand", ""))
+        df_data["purchase_hint"].append(purchase_hint)
 
         # 基于AI关键词匹配评价
         review = "使用体验良好"
@@ -457,9 +494,12 @@ def json_to_dataframe(cleaned_products: List[Dict], client: OpenAI) -> pd.DataFr
     df["price"] = df["price"].astype(float)
     df["original_price"] = df["original_price"].astype(float)
     df["discount_percentage"] = df["discount_percentage"].astype(float)
-    df["search_volume"] = df["search_volume"].astype(int)
     df["sales"] = df["sales"].astype(int)
     df["reviews_count"] = df["reviews_count"].astype(int)
+    df["rating"] = df["rating"].astype(float)
+    df["amazon_choice"] = df["amazon_choice"].astype(int)
+    df["best_seller"] = df["best_seller"].astype(int)
+    df["prime_eligible"] = df["prime_eligible"].astype(int)
     print(f"DataFrame构建完成：共{len(df)}条有效记录（过滤空价格后）")
     return df
 
@@ -501,7 +541,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
         df["price_bin"] = pd.cut(
             df["price"],
             bins=[0, 100, 300, 1000, float('inf')],
-            labels=["低价(<100元)", "中价(100-300元)", "高价(300-1000元)", "超高价(>1000元)"],
+            labels=["低价(<100$)", "中价(100-300$)", "高价(300-1000$)", "超高价(>1000$)"],
             include_lowest=True,
             right=False
         ).astype(object)
@@ -509,13 +549,14 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
 
     # 销量分箱
     df["sales_bin"] = None
-    df["sales_bin"] = pd.cut(
-        df["sales"],
-        bins=[0, 1000, 3000, 5000],
-        labels=["低销量", "中销量", "高销量"],
-        include_lowest=True,
-        right=False
-    ).astype(object)
+    if len(df[df["sales"] >= 0]) > 0:
+        df["sales_bin"] = pd.cut(
+            df["sales"],
+            bins=[0, 500, 2000, 5000, float('inf')],
+            labels=["低销量(<500)", "中销量(500-2000)", "高销量(2000-5000)", "超高销量(>5000)"],
+            include_lowest=True,
+            right=False
+        ).astype(object)
     df["sales_bin"] = df["sales_bin"].fillna("未知销量")
 
     # 折扣分箱
@@ -528,6 +569,18 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
         right=False
     ).astype(object)
     df["discount_bin"] = df["discount_bin"].fillna("无折扣")
+
+    # 评分分箱
+    df["rating_bin"] = None
+    if len(df[df["rating"] > 0]) > 0:
+        df["rating_bin"] = pd.cut(
+            df["rating"],
+            bins=[0, 4.0, 4.5, 5.0],
+            labels=["低分(<4.0)", "中分(4.0-4.5)", "高分(>4.5)"],
+            include_lowest=True,
+            right=False
+        ).astype(object)
+    df["rating_bin"] = df["rating_bin"].fillna("未知评分")
 
     return df
 
@@ -546,7 +599,7 @@ def title_pattern_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
     if not valid_titles:
         return {"error": "无有效标题数据"}
 
-    # 1. 关键词组（N-Gram）统计
+    # 1. 关键词组（N-Gram）统计（英文标题适配）
     vectorizer = CountVectorizer(ngram_range=(2, 3), stop_words='english')
     ngram_matrix = vectorizer.fit_transform(valid_titles)
     ngram_counts = ngram_matrix.sum(axis=0).A1
@@ -560,7 +613,7 @@ def title_pattern_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
     for title in valid_titles:
         words = re.sub(r'[^\w\s]', '', title.lower()).split()
         for idx, word in enumerate(words, 1):
-            # 单词语权重
+            # 单词语权重（位置越靠前权重越高）
             weight = 1.0 / idx
             if word not in position_weights:
                 position_weights[word] = 0.0
@@ -630,12 +683,14 @@ def multi_dimension_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
         lda_model = models.LdaModel(corpus=corpus, id2word=dictionary, num_topics=3, random_state=42, passes=10)
         topics = [f"主题{idx + 1}：{topic}" for idx, topic in lda_model.print_topics(num_words=5)]
 
-        # 关键词热度-竞争度评分
+        # 关键词热度-竞争度评分（替换搜索量为评分+销量）
         keyword_freq = pd.Series([w for text in texts for w in text]).value_counts()
         top_10_keywords = keyword_freq.head(10).index.tolist()
         keyword_scores = []
         for kw in top_10_keywords:
-            heat = df[df["title_cut"].str.contains(kw)]["search_volume"].mean() / 1000
+            # 热度：包含该关键词的商品平均评分+平均销量归一化
+            kw_products = df[df["title_cut"].str.contains(kw)]
+            heat = (kw_products["rating"].mean() + (kw_products["sales"].mean() / 1000)) / 2
             competition = keyword_freq[kw] / keyword_freq.max()
             score = heat / (competition + 0.1)
             keyword_scores.append({
@@ -659,16 +714,17 @@ def multi_dimension_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
     # 4.2 标题模式与关键词组分析
     analysis_result["标题模式分析"] = title_pattern_analysis(df, client)
 
-    # 4.3 销量预测与需求分析
+    # 4.3 销量预测与需求分析（替换特征：去掉search_volume，加入rating）
     print("\n=== 2. 销量预测与需求分析 ===")
-    valid_features = df.dropna(subset=["price", "search_volume", "sales"])
+    valid_features = df.dropna(subset=["price", "sales", "rating", "discount_percentage"])
     future_sales_pred_list = []
     price_sales_corr = 0.0
 
-    if len(valid_features) < 10:
-        analysis_result["销量分析"] = {"error": "有效数据量不足（需至少10条），无法进行销量预测"}
+    if len(valid_features) < 5:  # 降低数据量要求适配相机数据
+        analysis_result["销量分析"] = {
+            "error": f"有效数据量不足（当前{len(valid_features)}条，需至少5条），无法进行销量预测"}
     else:
-        features = ["price", "search_volume", "discount_percentage"]
+        features = ["price", "discount_percentage", "rating"]  # 替换为价格、折扣、评分
         X = valid_features[features]
         y = valid_features["sales"]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -686,8 +742,8 @@ def multi_dimension_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
         # 未来价格带销量预测
         future_price_bands = pd.DataFrame({
             "price": [99, 199, 299],
-            "search_volume": [80000, 60000, 40000],
-            "discount_percentage": [5, 10, 15]
+            "discount_percentage": [5, 10, 15],
+            "rating": [4.5, 4.6, 4.7]
         })
         future_sales_pred = xgb_model.predict(future_price_bands)
         future_sales_pred_list = [int(round(x)) for x in future_sales_pred]
@@ -699,18 +755,18 @@ def multi_dimension_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
             "模型评估": {"MAE": mae, "R²": r2},
             "价格-销量相关性": price_sales_corr,
             "未来价格带销量预测": [
-                {"价格": 99, "预测销量": future_sales_pred_list[0]},
-                {"价格": 199, "预测销量": future_sales_pred_list[1]},
-                {"价格": 299, "预测销量": future_sales_pred_list[2]}
+                {"价格": 99, "折扣": 5, "评分": 4.5, "预测销量": future_sales_pred_list[0]},
+                {"价格": 199, "折扣": 10, "评分": 4.6, "预测销量": future_sales_pred_list[1]},
+                {"价格": 299, "折扣": 15, "评分": 4.7, "预测销量": future_sales_pred_list[2]}
             ],
             "特征重要性": dict(zip(features, feature_importance))
         }
         print(f"销量模型R²：{r2:.2f}（越接近1预测越准）")
         print(f"价格-销量相关性：{price_sales_corr:.2f}（负数表示价格越高销量越低）")
 
-    # 4.4 价格-销量-折扣关联规则分析
-    print("\n=== 3. 价格-销量-折扣关联规则分析 ===")
-    assoc_df = pd.get_dummies(df[["price_bin", "sales_bin", "discount_bin"]])
+    # 4.4 价格-销量-评分-折扣关联规则分析
+    print("\n=== 3. 价格-销量-评分-折扣关联规则分析 ===")
+    assoc_df = pd.get_dummies(df[["price_bin", "sales_bin", "discount_bin", "rating_bin"]])
 
     # 降低最小支持度阈值，适配分散数据
     frequent_itemsets = apriori(assoc_df, min_support=0.05, use_colnames=True)
@@ -724,7 +780,7 @@ def multi_dimension_analysis(df: pd.DataFrame, client: OpenAI) -> Dict:
         for idx, row in rules.iterrows():
             antecedents = list(row["antecedents"])
             consequents = list(row["consequents"])
-            if any("price_bin" in a or "discount_bin" in a for a in antecedents) and any(
+            if any("price_bin" in a or "discount_bin" in a or "rating_bin" in a for a in antecedents) and any(
                     "sales_bin" in c for c in consequents):
                 core_rules.append({
                     "规则": f"{', '.join(antecedents)} → {', '.join(consequents)}",
@@ -952,7 +1008,7 @@ def generate_title_recommendation_score(client: OpenAI, titles: list, category_n
     ## 评分规则
     1. 标题包含高潜力关键词/核心关键词/高频词组越多，分数越高
     2. 标题包含高位置权重词组且放置在靠前位置，分数越高
-    3. 标题卖点贴合高权重销量特征（如价格、搜索量），分数越高
+    3. 标题卖点贴合高权重销量特征（如价格、评分、折扣），分数越高
     4. 标题符合亚马逊爆款特征（卖点丰富、适配品类），分数越高
     5. 分数必须在0-10之间，保留2位小数
 
